@@ -63,42 +63,14 @@ resource_pools:
 jobs:
   - name: <%= properties.job || "batlight" %>
     templates: <% (properties.templates || ["batlight"]).each do |template| %>
-      - name: <%= template %>
-    <% end %>
+                 - name: <%= template %>
     instances: <%= properties.instances %>
     resource_pool: common
-    <% if properties.persistent_disk %>
-    persistent_disk: <%= properties.persistent_disk %>
-    <% end %>
-    <% if properties.persistent_disks %>
-    persistent_disks:
-    <% properties.persistent_disks.each do |disk| %>
-    - name: <%= disk.name %>
-      type: <%= disk.type %>
-    <% end %>
-    <% end %>
     networks:
-    <% properties.job_networks.each_with_index do |network, i| %>
-    - name: <%= network.name %>
-    <% if i == 0 %>
-    default: [dns, gateway]
+      name: default
 
-    <% end %>
-    <% end %>
-    <% if properties.use_vip %>
-    - name: static
+    default: [dns, gateway]
+    name: static
       static_ips:
         - <%= properties.vip %>
-    <% end %>
-
-properties:
-  batlight:
-    <% if properties.batlight.fail %>
-    fail: <%= properties.batlight.fail %>
-    <% end %>
-    <% if properties.batlight.missing %>
-    missing: <%= properties.batlight.missing %>
-    <% end %>
-    <% if properties.batlight.drain_type %>
-    drain_type: <%= properties.batlight.drain_type %>
-    <% end %>
+    
