@@ -8,7 +8,7 @@ export BAT_DEPLOYMENT_SPEC=$PWD/ali/ali.yml
 export BAT_BOSH_CLI=bosh
 
 # DNS host or IP where BOSH-controlled PowerDNS server is running, which is required for the DNS tests. For example, if BAT is being run against a MicroBOSH then this value will be the same as BAT_DIRECTOR
-
+export BAT_DNS_HOST=192.168.0.198
 # the name of infrastructure that is used by bosh deployment. Examples: aws, vsphere, openstack, warden, oci.
 export BAT_INFRASTRUCTURE=alicloud
 
