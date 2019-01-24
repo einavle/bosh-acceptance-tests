@@ -42,8 +42,7 @@ networks:
         - 100.100.2.138
       vswitch_id: vsw-gw8kokw4mehjrg04tksu8 # VPC subnet
       security_group_id: 'sg-gw87zdw9d9q38f6mvfdi' # VPC security groups
-  - name: static
-    type: vip
+
 
 resource_pools:
   - name: common
@@ -83,10 +82,7 @@ jobs:
     - name: <%= network.name %>
     <% if i == 0 %>
     default: [dns, gateway]
-    static_ips:
-    <% properties.instances.times do |i| %>
-    - <%= properties.static_ips[i] %>
-    <% end %>
+   
     <% end %>
     <% end %>
     <% if properties.use_vip %>
