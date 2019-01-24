@@ -82,7 +82,9 @@ jobs:
     - name: <%= network.name %>
     <% if i == 0 %>
     default: [dns, gateway]
-    
+   
+    <% end %>
+    <% end %>
     <% if properties.use_vip %>
     - name: static
       static_ips:
