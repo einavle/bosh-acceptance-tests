@@ -1,6 +1,5 @@
 ---
 name: <%= properties.name || "bat" %>
-director_uuid: <%= properties.uuid %>
 
 releases:
   - name: bat
@@ -31,24 +30,20 @@ disk_pools:
   <% end %>
 
 networks:
-    <% properties.networks.each do |network| %>
-      - name: <%= network.name %>
-      type: <%= network.type %>
-      subnets:
-          <% network.subnets.each do |subnet| %>
-            - range: <%= subnet.range %>
-            static: [<%= subnet.static %>]
-            gateway: <%= subnet.gateway %>
-            dns: <%= p('dns').inspect %>
-            cloud_properties:
-              network_name: <%= subnet.cloud_properties.network_name %>
-              subnetwork_name: <%= subnet.cloud_properties.subnetwork_name %>
-              ephemeral_external_ip: <%= subnet.cloud_properties.ephemeral_external_ip || false %>
-              tags: <%= subnet.cloud_properties.tags || [] %>
-            <% end %>
-      <% end %>
-      - name: static
-        type: vip
+  - name: default
+      type: manual
+      static_ip: 10.10.0.30
+      cidr: 192.168.0.0/16
+      reserved: ['192.168.0.2 - 192.168.0.9']
+      static: ['192.168.0.10 - 192.168.0.31']
+      gateway: 192.168.0.1
+      dns:
+        - 100.100.2.136
+        - 100.100.2.138
+      vswitch_id: vsw-gw8kokw4mehjrg04tksu8 # VPC subnet
+      security_group_id: 'sg-gw87zdw9d9q38f6mvfdi' # VPC security groups
+  - name: static
+    type: vip
 
 resource_pools:
   - name: common
@@ -57,10 +52,9 @@ resource_pools:
       name: <%= properties.stemcell.name %>
       version: "<%= properties.stemcell.version %>"
     cloud_properties:
-      machine_type: <%= properties.machine_type || "n1-standard-2" %>
-      root_disk_size_gb: <%= properties.root_disk_size_gb || 20 %>
-      root_disk_type: <%= properties.root_disk_type || "pd-standard" %>
-      zone: <%= properties.zone %>
+      instance_type: <%= properties.instance_type || "n1-standard-2" %>
+      disk_size: <%= properties.disk_size || 20 %>
+      availability_zone: <%= properties.availability_zone %>
     <% if properties.password %>
     env:
       bosh:

@@ -6,5 +6,5 @@ describe 'network configuration' do
     @requirements.requirement(@requirements.release)
   end
 
-  
+
 end
