@@ -10,9 +10,8 @@ compilation:
   network: default
   reuse_compilation_vms: true
   cloud_properties:
-    machine_type: <%= properties.machine_type || "n1-standard-2" %>
-    root_disk_size_gb: <%= properties.root_disk_size_gb || 20 %>
-    root_disk_type: <%= properties.root_disk_type || "pd-standard" %>
+    instance_type: <%= properties.instance_type || "n1-standard-2" %>
+    disk_size: <%= properties.disk_size || 20 %>
     zone: <%= properties.zone %>
 
 update:
@@ -21,13 +20,7 @@ update:
   update_watch_time: 3000-90000
   max_in_flight: <%= properties.max_in_flight || 1 %>
 
-  <% if properties.disk_pools %>
-disk_pools:
-  <% properties.disk_pools.each do |disk_pool| %>
-- name: <%= disk_pool.name %>
-  disk_size: <%= disk_pool.disk_size %>
-  <% end %>
-  <% end %>
+
 
 networks:
   - name: default
@@ -54,11 +47,7 @@ resource_pools:
       instance_type: <%= properties.instance_type || "n1-standard-2" %>
       disk_size: <%= properties.disk_size || 20 %>
       availability_zone: <%= properties.availability_zone %>
-    <% if properties.password %>
-    env:
-      bosh:
-        password: <%= properties.password %>
-    <% end %>
+
 
 jobs:
   - name: <%= properties.job || "batlight" %>
@@ -73,4 +62,4 @@ jobs:
     name: static
       static_ips:
         - <%= properties.vip %>
-    
+
