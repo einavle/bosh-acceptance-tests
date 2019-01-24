@@ -38,10 +38,8 @@ module Bat
     end
 
     def cleanup(what)
-      if @spec_state.skip_cleanup?
         @logger.info("Skipping cleanup #{what}")
         return
-      end
 
       @logger.info("Starting cleanup #{what}")
       case what
