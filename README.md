@@ -38,7 +38,7 @@ export BAT_NETWORKING=
 export BAT_PRIVATE_KEY=
 
 # Run tests with --fail-fast and skip cleanup in case of failure (optional)
-export BAT_DEBUG_MODE=
+export BAT_DEBUG_MODE=trueG
 ```
 
 To enable OS tests set:
