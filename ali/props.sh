@@ -19,7 +19,7 @@ export BAT_NETWORKING= manual
 export BAT_PRIVATE_KEY=$PWD/jumpbox.key
 
 # Run tests with --fail-fast and skip cleanup in case of failure (optional)
-export BAT_DEBUG_MODE=false
+export BAT_DEBUG_MODE=true
 export BOSH_ENVIRONMENT=192.168.0.198
 export BOSH_CLIENT=jumpbox
 export BOSH_CLIENT_SECRET=$PWD/einav-ali.pem
