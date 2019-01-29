@@ -18,7 +18,7 @@ update:
   max_in_flight: 1
 networks:
   - name: default
-    type: manual
+    type: vip
     static_ip: 10.10.0.30
     cidr: 192.168.0.0/16
     reserved:
