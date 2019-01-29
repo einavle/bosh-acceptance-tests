@@ -48,7 +48,7 @@ jobs:
     instances: 1
     resource_pool: common
     networks:
-      name: default
+    - name: default
     default:
       - dns
       - gateway
