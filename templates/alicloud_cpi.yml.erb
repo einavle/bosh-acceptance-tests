@@ -42,7 +42,7 @@ resource_pools:
     network: default
     stemcell:
       name: <%= properties.stemcell.name %>
-      version: "<%= properties.stemcell.version %>"
+      version: <%= properties.stemcell.version %>
     cloud_properties:
       instance_type: <%= properties.instance_type || "n1-standard-2" %>
       disk_size: <%= properties.disk_size || 20 %>
@@ -53,6 +53,7 @@ jobs:
   - name: <%= properties.job || "batlight" %>
     templates: <% (properties.templates || ["batlight"]).each do |template| %>
                  - name: <%= template %>
+                 <% end -%>
     instances: <%= properties.instances %>
     resource_pool: common
     networks:
