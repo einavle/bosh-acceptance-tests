@@ -1,0 +1,55 @@
+name: bat
+releases:
+  - name: bat
+    version: latest
+compilation:
+  workers: 2
+  network: default
+  reuse_compilation_vms: true
+  cloud_properties:
+    instance_type: ecs.sn1ne.large
+    disk_size: 20480
+    zone:
+update:
+  canaries: 1
+  canary_watch_time: 3000-90000
+  update_watch_time: 3000-90000
+  max_in_flight: 1
+networks:
+  - name: default
+    type: manual
+    static_ip: 10.10.0.30
+    cidr: 192.168.0.0/16
+    reserved:
+      - 192.168.0.2 - 192.168.0.9
+    static:
+      - 192.168.0.10 - 192.168.0.31
+    gateway: 192.168.0.1
+    dns:
+      - 100.100.2.136
+      - 100.100.2.138
+    vswitch_id: vsw-gw8kokw4mehjrg04tksu8
+    security_group_id: sg-gw87zdw9d9q38f6mvfdi
+resource_pools:
+  - name: common
+    network: default
+    stemcell:
+      name: bosh-alicloud-kvm-ubuntu-xenial-go_agent
+      version: 170.21
+    cloud_properties:
+      instance_type: ecs.sn1ne.large
+      disk_size: 20480
+      availability_zone: eu-central-1a
+jobs:
+  - name: batlight
+    templates:
+      - name: batlight
+    instances: 1
+    resource_pool: common
+    networks:
+      name: default
+    default:
+      - dns
+      - gateway
+    static_ips:
+      - 192.168.0.15
