@@ -24,12 +24,12 @@ update:
 
 networks:
   - name: default
-      type: manual
-      static_ip: 10.10.0.30
-      cidr: 192.168.0.0/16
-      reserved: ['192.168.0.2 - 192.168.0.9']
-      static: ['192.168.0.10 - 192.168.0.31']
-      gateway: 192.168.0.1
+    type: manual
+    static_ip: 10.10.0.30
+    cidr: 192.168.0.0/16
+    reserved: ['192.168.0.2 - 192.168.0.9']
+    static: ['192.168.0.10 - 192.168.0.31']
+    gateway: 192.168.0.1
       dns:
         - 100.100.2.136
         - 100.100.2.138
