@@ -17,7 +17,7 @@ update:
   update_watch_time: 3000-90000
   max_in_flight: 1
 networks:
-  name: default
+- name: default
   type: vip
   static_ip: 10.10.0.30
   cidr: 192.168.0.0/16
