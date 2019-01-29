@@ -240,7 +240,7 @@ Create a **bat** security group in the same VPC the BAT_DIRECTOR is running in. 
 Add TCP ports `22` and `4567` to the **default** security group.
 
 #### Flavors
-
+alicloud_support_v2
 Create the following flavors:
 
 * `m1.small`
