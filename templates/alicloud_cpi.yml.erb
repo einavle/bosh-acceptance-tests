@@ -53,7 +53,7 @@ jobs:
   - name: <%= properties.job || "batlight" %>
     templates: <% (properties.templates || ["batlight"]).each do |template| %>
                  - name: <%= template %>
-                 <% end -%>
+                 <% end %>
     instances: <%= properties.instances %>
     resource_pool: common
     networks:
