@@ -19,9 +19,6 @@ instance_groups:
     jobs:
     - name: batlight
       release: bat
-    templates:
-      - name: batlight
-    resource_pool: common
     default:
       - dns
       - gateway
