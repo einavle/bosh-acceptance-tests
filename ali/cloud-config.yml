@@ -1,0 +1,95 @@
+azs:
+  - name: z1
+    cloud_properties:
+      availability_zone: eu-central-1a
+  - name: z2
+    cloud_properties:
+      availability_zone: eu-central-1b
+vm_types:
+  - name: minimal
+    cloud_properties:
+      instance_type: ecs.mn4.small
+      ephemeral_disk: {size: "51_200"}
+  - name: small
+    cloud_properties:
+      instance_type: ecs.sn2.medium
+      ephemeral_disk: {size: "51_200"}
+  - name: default
+    cloud_properties:
+      instance_type: ecs.sn2.medium
+      ephemeral_disk: {size: "51_200"}
+  - name: small-highmem
+    cloud_properties:
+      instance_type: ecs.sn2ne.xlarge
+      ephemeral_disk: {size: "51_200"}
+  - name: compiler
+    cloud_properties:
+      instance_type: ecs.sn1.large
+      ephemeral_disk: {size: "51_200"}
+
+disk_types:
+  - name: 5GB
+    disk_size: 20_480
+  - name: 10GB
+    disk_size: 20_480
+  - name: 100GB
+    disk_size: 102_400
+
+vm_extensions:
+  - name: 5GB_ephemeral_disk
+    cloud_properties:
+      ephemeral_disk: {size: "20_480"}
+  - name: 10GB_ephemeral_disk
+    cloud_properties:
+      ephemeral_disk: {size: "20_480"}
+  - name: 50GB_ephemeral_disk
+    cloud_properties:
+      ephemeral_disk: {size: "50_120"}
+  - name: 100GB_ephemeral_disk
+    cloud_properties:
+      ephemeral_disk: {size: "102_400"}
+  - name: 500GB_ephemeral_disk
+    cloud_properties:
+      ephemeral_disk: {size: "512_000"}
+  - name: 1TB_ephemeral_disk
+    cloud_properties:
+      ephemeral_disk: {size: "1024_000"}
+  - name: cf-router-network-properties
+    cloud_properties:
+      slbs: lb-gw814ips5o5zusg5yxu2i
+  - name: cf-tcp-router-network-properties
+    cloud_properties:
+      slbs: lb-gw814ips5o5zusg5yxu2i
+  - name: diego-ssh-proxy-network-properties
+
+networks:
+  - name: default
+    type: manual
+    subnets:
+      - range: 192.168.1.0/24
+        gateway: 192.168.1.1
+        az: z2
+        dns: [8.8.8.8]
+        cloud_properties:
+          vswitch_id: vsw-gw8r3xauou170zkyvv8l8
+          security_group_ids:
+            - sg-gw8j7uuskm7shymims9u
+            - sg-gw87zdw9d9q38f6mvfdi
+      - range: 192.168.0.0/24
+        gateway: 192.168.0.1
+        az: z1
+        dns: [8.8.8.8]
+        cloud_properties:
+          vswitch_id: vsw-gw8kokw4mehjrg04tksu8
+          security_group_ids:
+            - sg-gw8j7uuskm7shymims9u
+            - sg-gw87zdw9d9q38f6mvfdi
+  - name: vip
+    type: vip
+
+compilation:
+  workers: 5
+  reuse_compilation_vms: true
+  az: z1
+  vm_type: compiler
+  network: default

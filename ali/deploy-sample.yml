@@ -23,9 +23,7 @@ instance_groups:
       release: bat
       properties:
         batlight:
-          fail:
           missing: nope
-          drain_type:
     default:
       - dns
       - gateway
