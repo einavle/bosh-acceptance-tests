@@ -9,7 +9,7 @@ stemcells:
     version: latest
 
 instance_groups:
-  - name: nginx
+  - name: bat
     azs: [z1 ,z2]
     instances: 1
     vm_type: default
@@ -21,7 +21,6 @@ instance_groups:
       release: bat
     templates:
       - name: batlight
-    instances: 1
     resource_pool: common
     default:
       - dns
