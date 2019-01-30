@@ -18,6 +18,8 @@ instance_groups:
     - name: default
     jobs:
     - name: batlight
+      templates:
+        - name: batlight
       release: bat
     default:
       - dns
