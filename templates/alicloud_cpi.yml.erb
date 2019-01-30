@@ -1,64 +1,37 @@
 ---
-name: <%= properties.name || "bat" %>
-
+name: bat
 releases:
   - name: bat
-    version: <%= properties.release || "latest" %>
+    version: latest
+stemcells:
+  - alias: ubuntu
+    os: ubuntu-xenial
+    version: latest
 
-compilation:
-  workers: <%= properties.compilation_workers || 2 %>
-  network: default
-  reuse_compilation_vms: true
-  cloud_properties:
-    instance_type: <%= properties.instance_type || "n1-standard-2" %>
-    disk_size: <%= properties.disk_size || 20 %>
-    zone: <%= properties.zone %>
-
-update:
-  canaries: <%= properties.canaries || 1 %>
-  canary_watch_time: 3000-90000
-  update_watch_time: 3000-90000
-  max_in_flight: <%= properties.max_in_flight || 1 %>
-
-
-
-networks:
-  - name: default
-    type: manual
-    static_ip: 10.10.0.30
-    cidr: 192.168.0.0/16
-    reserved: ['192.168.0.2 - 192.168.0.9']
-    static: ['192.168.0.10 - 192.168.0.31']
-    gateway: 192.168.0.1
-    dns:
-        - 100.100.2.136
-        - 100.100.2.138
-    vswitch_id: vsw-gw8kokw4mehjrg04tksu8 # VPC subnet
-    security_group_id: 'sg-gw87zdw9d9q38f6mvfdi' # VPC security groups
-
-
-resource_pools:
-  - name: common
-    network: default
-    stemcell:
-      name: <%= properties.stemcell.name %>
-      version: <%= properties.stemcell.version %>
-    cloud_properties:
-      instance_type: <%= properties.instance_type || "n1-standard-2" %>
-      disk_size: <%= properties.disk_size || 20 %>
-      availability_zone: <%= properties.availability_zone %>
-
-
-jobs:
-  - name: <%= properties.job || "batlight" %>
-    templates: <% (properties.templates || ["batlight"]).each do |template| %>
-                 - name: <%= template %>
-                 <% end %>
-    instances: <%= properties.instances %>
-    resource_pool: common
+instance_groups:
+  - name: batlight
+    azs: [z1 ,z2]
+    instances: 1
+    vm_type: default
+    stemcell: ubuntu
     networks:
-    - name: default
-
-    default: [dns, gateway]
+      - name: default
+    jobs:
+      - name: batlight
+        templates:
+          - name: batlight
+        release: bat
+        properties:
+          batlight:
+            missing: nope
+    default:
+      - dns
+      - gateway
     static_ips:
-        - <%= properties.vip %>
+      - 192.168.0.15
+update:
+  canaries: 1
+  max_in_flight: 1
+  serial: false
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000
