@@ -9,7 +9,7 @@ stemcells:
     version: latest
 
 instance_groups:
-  - name: bat
+  - name: batlight
     azs: [z1 ,z2]
     instances: 1
     vm_type: default
