@@ -24,8 +24,8 @@ instance_groups:
       properties:
         batlight:
           fail:
-          missing:
-          drain_type: 
+          missing: aaa
+          drain_type:
     default:
       - dns
       - gateway
