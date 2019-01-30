@@ -21,6 +21,11 @@ instance_groups:
       templates:
         - name: batlight
       release: bat
+      properties:
+        batlight:
+          fail:
+          missing:
+          drain_type: 
     default:
       - dns
       - gateway
