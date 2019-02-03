@@ -34,7 +34,7 @@ describe 'with release, stemcell and failed deployment', core: true do
       failed_deployment_result = bosh_safe("-d #{deployment_manifest_bad.name} deploy #{deployment_manifest_bad.to_path}")
 
       # possibly check for:
-      # Error 400007: 'batlight/0' is not running after update
+      # Error 400007: 'batlight/1' is not running after update
       expect(failed_deployment_result).to_not succeed
 
       events(get_most_recent_task_id, 'error').each do |event|
@@ -48,7 +48,7 @@ describe 'with release, stemcell and failed deployment', core: true do
       expect(bosh_safe("-d #{deployment_manifest_good.name} deploy #{deployment_manifest_good.to_path}")).to succeed
 
       # possibly check for:
-      # Error 400007: 'batlight/0' is not running after update
+      # Error 400007: 'batlight/1' is not running after update
       expect(bosh_safe("-d #{deployment_manifest_bad.name} deploy #{deployment_manifest_bad.to_path}")).to_not succeed
 
       events(get_most_recent_task_id, 'error').each do |event|
