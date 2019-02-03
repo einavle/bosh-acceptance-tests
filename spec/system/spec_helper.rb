@@ -68,19 +68,6 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.configure do |config|
-  config.before do |example|
-    unless example.metadata[:skip_task_check]
-      i = 0
-      begin
-        requirements.requirement(:no_tasks_processing) # 5 sec on local vsphere
-      rescue TasksProcessing => e
-        raise e if i > 5
 
-        sleep 1
-        i += 1
-        retry
-      end
-    end
   end
 end
