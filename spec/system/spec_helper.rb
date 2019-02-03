@@ -68,6 +68,10 @@ RSpec.configure do |config|
   end
 end
 
+RSpec.configure do |config|
+  config.before do |example|
+    
 
+    end
   end
 end
