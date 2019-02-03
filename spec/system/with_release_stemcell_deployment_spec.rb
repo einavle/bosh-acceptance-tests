@@ -31,7 +31,7 @@ describe 'with release, stemcell and deployment', core: true do
         ssh_command="sudo pkill -9 agent"
         expect(bosh_ssh('batlight', 1, ssh_command, deployment: deployment.name)).to succeed
         wait_for_instance_state('batlight', '0', 'running')
-        expect(bosh_safe("logs batlight/0 --agent --dir #{tmpdir}", deployment: deployment.name)).to succeed
+        expect(bosh_safe("logs batlight/1 --agent --dir #{tmpdir}", deployment: deployment.name)).to succeed
       end
     end
   end
@@ -45,7 +45,7 @@ describe 'with release, stemcell and deployment', core: true do
   describe 'job' do
     it 'should recreate a job' do
       old_vm_cid = JSON.parse(bosh_safe('instances --details', deployment: deployment.name).output)['Tables'].first['Rows'].first["vm_cid"]
-      expect(bosh_safe('recreate batlight/0', deployment: deployment.name)).to succeed
+      expect(bosh_safe('recreate batlight/1', deployment: deployment.name)).to succeed
       new_vm_cid = JSON.parse(bosh_safe('instances --details', deployment: deployment.name).output)['Tables'].first['Rows'].first["vm_cid"]
       expect(old_vm_cid).not_to eq(new_vm_cid)
     end
