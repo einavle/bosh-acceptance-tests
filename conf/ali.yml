@@ -1,0 +1,27 @@
+---
+cpi: alicloud
+properties:
+  stemcell:
+    name: bosh-alicloud-kvm-ubuntu-xenial-go_agent
+    version: 170.21
+  pool_size: 1
+  disk_size: 20_480
+  availability_zone: eu-central-1a #zone
+  instances: 1
+  instance_type: ecs.sn1ne.large
+  vip: 192.168.0.15  # static reserced ip for bat deployed VM
+  second_static_ip: 192.168.0.31 # Secondary (private) IP to use for reconfiguring networks, must be in the primary network & different from static_ip
+  networks:
+    - name: default
+      type: manual
+      static_ip: 10.10.0.30
+      cidr: 192.168.0.0/16
+      reserved: ['192.168.0.2 - 192.168.0.9']
+      static: ['192.168.0.10 - 192.168.0.31']
+      gateway: 192.168.0.1
+      dns:
+        - 100.100.2.136
+        - 100.100.2.138
+      vswitch_id: vsw-gw8kokw4mehjrg04tksu8 # VPC subnet
+      security_group_id: 'sg-gw87zdw9d9q38f6mvfdi' # VPC security groups
+  key_name: einav-ali # (optional) SSH keypair name, overrides the director's default_key_name setting
