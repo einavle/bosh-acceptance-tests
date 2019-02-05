@@ -15,7 +15,7 @@ properties:
       cidr: 10.0.0.0/24
       reserved: ['10.0.0.0.2 - 10.0.0.0.9']
       static: ['10.0.0.0.10 - 10.0.0.0.31']
-      gateway: 10.10.0.1
+      gateway: 10.0.0.1
       subnet: subnet-04b6173bf5018603c      # VPC subnet
       security_groups: 'bat-bosh' # VPC security groups
   key_name: bosh # (optional) SSH keypair name, overrides the director's default_key_name setting
