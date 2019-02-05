@@ -91,7 +91,7 @@ module Bat
     end
 
     def require_deployment(what, deployment_spec, options)
-      if options[:force]
+      if @bosh_runner.deployments.include?(what.name) && !options[:force]
         @logger.info('deployment already deployed, skipping deployment')
       else
         @logger.info('deployment not already deployed, deploying...')
