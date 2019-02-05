@@ -3,8 +3,8 @@ cpi: aws
 properties:
   availability_zone: use1-az1
   stemcell:
-    name: bosh-aws-xen-ubuntu-trusty-go_agent
-    version: latest
+    name: bosh-aws-xen-hvm-ubuntu-xenial-go_agent
+    version: 250.4
   pool_size: 1
   instances: 1
   vip: 3.94.225.103  # elastic ip for bat deployed VM
