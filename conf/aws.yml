@@ -2,6 +2,7 @@
 cpi: aws
 properties:
   availability_zone: us-east-1a
+  instance_type: t2.micro
   stemcell:
     name: bosh-aws-xen-hvm-ubuntu-xenial-go_agent
     version: 250.4
