@@ -8,13 +8,13 @@ properties:
   pool_size: 1
   instances: 1
   vip: 3.94.225.103  # elastic ip for bat deployed VM
-  second_static_ip: 10.10.0.31 # Secondary (private) IP to use for reconfiguring networks, must be in the primary network & different from static_ip
+  second_static_ip: 10.0.0.31 # Secondary (private) IP to use for reconfiguring networks, must be in the primary network & different from static_ip
   networks:
     - name: default
-      static_ip: 10.0.0.0.30
+      static_ip: 10.0.0.30
       cidr: 10.0.0.0/24
-      reserved: ['10.0.0.0.2 - 10.0.0.0.9']
-      static: ['10.0.0.0.10 - 10.0.0.0.31']
+      reserved: ['10.0.0.2 - 10.0.0.9']
+      static: ['10.0.0.10 - 10.0.0.31']
       gateway: 10.0.0.1
       subnet: subnet-04b6173bf5018603c      # VPC subnet
       security_groups: 'bat-bosh' # VPC security groups
