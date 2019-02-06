@@ -5,7 +5,7 @@ properties:
   instance_type: ecs.sn1ne.large
   stemcell:
     name: bosh-alicloud-kvm-ubuntu-xenial-go_agent
-    version: 170.21
+    version: 250.4
   pool_size: 1
   instances: 1
   vip: 47.254.170.207  # elastic ip for bat deployed VM
