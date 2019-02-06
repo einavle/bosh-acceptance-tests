@@ -21,7 +21,7 @@ describe Bat::BoshHelper do
       allow(env).to receive(:private_key).and_return('fake_private_key')
     end
 
-    it 'returns the private key from the env' do
+    it 'returns the private key from the env' , private_key: true do
       expect(bosh_helper.ssh_options).to eq(private_key: 'fake_private_key')
     end
   end
