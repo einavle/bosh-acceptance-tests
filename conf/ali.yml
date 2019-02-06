@@ -8,7 +8,7 @@ properties:
     version: 170.21
   pool_size: 1
   instances: 1
-  vip: 192.168.0.15  # elastic ip for bat deployed VM
+  vip: 47.254.170.207  # elastic ip for bat deployed VM
   second_static_ip: 192.168.0.31 # Secondary (private) IP to use for reconfiguring networks, must be in the primary network & different from static_ip
   networks:
     - name: default
