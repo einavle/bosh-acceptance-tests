@@ -120,8 +120,8 @@ module Bat
         if network['type'] == 'manual'
           memo << network['static_ip']
         end
-        memo
       end
+      memo
     end
 
     def use_second_static_ip
