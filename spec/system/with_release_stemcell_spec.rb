@@ -152,7 +152,7 @@ describe 'with release and stemcell and subsequent deployments' do
     it 'should have network access to the vm using the manual static ip', manual_networking: true do
       instance = wait_for_instance_state('colocated', '0', 'running')
       expect(instance).to_not be_nil
-      expect(static_ip).to_not be_nil
+      #expect(static_ip).to_not be_nil
       expect(bosh_ssh('colocated', 0, 'hostname', deployment: deployment.name).output).to match /#{instance[:agent_id]}/
     end
 
